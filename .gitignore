@@ -1,3 +1,4 @@
 .env
+.gitignore
 melodychat.json
 node_modules

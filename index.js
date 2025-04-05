@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-
+import cors from "cors";
 // Load environment variables
 dotenv.config();
 
@@ -11,6 +11,14 @@ import messageRoutes from "./routes/messageRoutes.js";
 
 // Express app setup
 const app = express();
+app.use(
+    cors({
+      credentials: true,
+      origin: [
+        "http://localhost:3000"
+      ],
+    })
+  );
 app.use(express.json());
 
 // Use routes
