@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 // Insert message with createdAt
 export const insertMessage = async (req, res) => {
     try {
-      const { headerId, musicId, message, canReply } = req.body;
+      const { headerId, musicId, message, canReply, senderId } = req.body;
       const id = uuidv4();
       const createdAt = Timestamp.now(); // Gunakan Timestamp dari Firestore Admin SDK
   
@@ -15,6 +15,7 @@ export const insertMessage = async (req, res) => {
         musicId,
         message,
         canReply,
+        senderId,
         createdAt,
       });
   
