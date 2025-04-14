@@ -59,6 +59,8 @@ export const createUser = async (req, res) => {
 
     // 8. Response
     res.status(201).json({
+      message: "User Created Successfuly",
+      success: true,
       userId: userRecord.uid,
       email: userRecord.email,
       name: finalName,
