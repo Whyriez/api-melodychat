@@ -7,7 +7,10 @@ export const createUser = async (req, res) => {
     const { email, password, name } = req.body;
 
     // 1. Cek email
-    const existingUser = await admin.auth().getUserByEmail(email).catch(() => null);
+    const existingUser = await admin
+      .auth()
+      .getUserByEmail(email)
+      .catch(() => null);
     if (existingUser) {
       return res.status(400).json({ error: "Email is already in use" });
     }
@@ -59,6 +62,8 @@ export const createUser = async (req, res) => {
 
     // 8. Response
     res.status(201).json({
+      message: "User Created Successfuly",
+      success: true,
       userId: userRecord.uid,
       email: userRecord.email,
       name: finalName,
@@ -66,7 +71,7 @@ export const createUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Error creating user:", error);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ message: error.message, success: false });
   }
 };
 
