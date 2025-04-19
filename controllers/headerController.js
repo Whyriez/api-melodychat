@@ -47,7 +47,7 @@ export const updateHeader = async (req, res) => {
       theme: theme || headerData.theme,
     };
     res.status(200).json({
-      message: "Fetch Successfuly",
+      message: "Updated Successfuly",
       success: true,
       data: updatedHeader,
     });
