@@ -46,9 +46,16 @@ export const updateHeader = async (req, res) => {
       text: text || headerData.text,
       theme: theme || headerData.theme,
     };
-    res.status(200).json(updatedHeader);
+    res.status(200).json({
+      message: "Fetch Successfuly",
+      success: true,
+      data: updatedHeader,
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({
+      message: error.message,
+      status: false,
+    });
   }
 };
 
