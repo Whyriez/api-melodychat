@@ -70,7 +70,7 @@ export const getHeaderByName = async (req, res) => {
     const header = snapshot.docs[0].data();
     res.status(200).json({
       message: "Fetch Successfuly",
-      status: true,
+      success: true,
       data: header,
     });
   } catch (error) {
