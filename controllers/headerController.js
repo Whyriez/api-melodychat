@@ -111,7 +111,7 @@ export const headersWithMessages = async (req, res) => {
     let query = db
       .collection("messages")
       .where("headerId", "==", headerData.id)
-      .orderBy("createdAt", "desc");
+      .orderBy("createdAt");
 
     // Gunakan startAfter() untuk pagination Firestore
     if (lastVisible) {
