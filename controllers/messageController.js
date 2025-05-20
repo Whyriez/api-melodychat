@@ -36,6 +36,7 @@ export const getMessagesByHeader = async (req, res) => {
 
     const snapshot = await db.collection("messages")
       .where("headerId", "==", headerId)
+      .orderBy("createdAt", "desc")
       .orderBy("createdAt")
       .offset(offset)
       .limit(parseInt(limit))
