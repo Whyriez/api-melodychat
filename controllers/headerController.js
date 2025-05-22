@@ -165,7 +165,7 @@ export const updateFcmToken = async (req, res) => {
   try {
     const { userId, token } = req.body;
 
-    if (!userId || !token) {
+    if (!userId) {
       return res.status(400).json({ error: "userId dan token wajib diisi." });
     }
 
