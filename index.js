@@ -8,6 +8,7 @@ dotenv.config();
 import userRoutes from "./routes/userRoutes.js";
 import headerRoutes from "./routes/headerRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
+import notificationRoutes from "./routes/notificationRoutes.js";
 
 // Express app setup
 const app = express();
@@ -24,6 +25,7 @@ app.use(express.json());
 
 // Use routes
 app.use("/api", userRoutes);
+app.use("/api", notificationRoutes);
 app.use("/api", headerRoutes);
 app.use("/api", messageRoutes);
 
