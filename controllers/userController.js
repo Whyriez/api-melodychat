@@ -57,6 +57,9 @@ export const createUser = async (req, res) => {
       text: "Hallo",
       theme: "default",
       userId: userRecord.uid,
+      token: "",
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
     await db.collection("headers").doc(headerId).set(defaultHeader);
 
