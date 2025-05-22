@@ -95,10 +95,11 @@ export const headersWithMessages = async (req, res) => {
     const { name } = req.params;
     const { page = 1, limit = 10, lastVisible } = req.query;
 
-    // Ambil header berdasarkan 'name'
+    const lowerName = name.toLowerCase();
+
     const headerSnapshot = await db
       .collection("headers")
-      .where("name", "==", name)
+      .where("name", "==", lowerName)
       .get();
 
     if (headerSnapshot.empty) {
@@ -179,7 +180,9 @@ export const updateFcmToken = async (req, res) => {
       .get();
 
     if (headerQuery.empty) {
-      return res.status(404).json({ error: "Header untuk user tidak ditemukan." });
+      return res
+        .status(404)
+        .json({ error: "Header untuk user tidak ditemukan." });
     }
 
     const headerDoc = headerQuery.docs[0];
