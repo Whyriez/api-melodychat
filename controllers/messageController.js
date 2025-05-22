@@ -33,12 +33,14 @@ export const markMessageAsRead = async (req, res) => {
 
     const messageRef = db.collection("messages").doc(messageId);
 
-
     await messageRef.update({
       isRead: true,
     });
 
-    res.status(200).json({ message: `Message ${messageId} marked as read.` });
+    res.status(200).json({
+      success: true,
+      message: `Message ${messageId} marked as read.`,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -95,7 +97,10 @@ export const deleteMessage = async (req, res) => {
 
     await messageRef.delete();
 
-    res.status(200).json({ message: `Message ${messageId} has been deleted.` });
+    res.status(200).json({
+      success: true,
+      message: `Message ${messageId} has been deleted.`,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
