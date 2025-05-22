@@ -81,3 +81,22 @@ export const getMessagesByHeader = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const deleteMessage = async (req, res) => {
+  try {
+    const { messageId } = req.params;
+
+    const messageRef = db.collection("messages").doc(messageId);
+
+    const doc = await messageRef.get();
+    if (!doc.exists) {
+      return res.status(404).json({ error: `Message ${messageId} not found.` });
+    }
+
+    await messageRef.delete();
+
+    res.status(200).json({ message: `Message ${messageId} has been deleted.` });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
