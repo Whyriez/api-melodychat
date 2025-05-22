@@ -64,9 +64,11 @@ export const getHeaderByName = async (req, res) => {
   try {
     const { name } = req.params;
 
+    const lowerName = name.toLowerCase();
+
     const snapshot = await db
       .collection("headers")
-      .where("name", "==", name)
+      .where("name", "==", lowerName)
       .limit(1)
       .get();
 
