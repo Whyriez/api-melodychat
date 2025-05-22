@@ -160,3 +160,40 @@ export const headersWithMessages = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+export const updateFcmToken = async (req, res) => {
+  try {
+    const { userId, token } = req.body;
+
+    if (!userId || !token) {
+      return res.status(400).json({ error: "userId dan token wajib diisi." });
+    }
+
+    // Cari header berdasarkan userId
+    const headerQuery = await db
+      .collection("headers")
+      .where("userId", "==", userId)
+      .limit(1)
+      .get();
+
+    if (headerQuery.empty) {
+      return res.status(404).json({ error: "Header untuk user tidak ditemukan." });
+    }
+
+    const headerDoc = headerQuery.docs[0];
+
+    // Update token
+    await headerDoc.ref.update({
+      token: token,
+      updatedAt: new Date(),
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "FCM token berhasil diperbarui.",
+    });
+  } catch (err) {
+    console.error("Gagal update token:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
